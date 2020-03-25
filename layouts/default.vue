@@ -15,26 +15,30 @@ export default {
     this.$nextTick(async () => {
       this.liff = window.liff
       const liffId = '1553887502-4Dop0qr8'
-      const path = this.$route.path
-      if (path && path !== '/') {
-        localStorage.setItem('redirectPath', String(path))
-      }
+      // const path = this.$route.path
+      // if (path && path !== '/') {
+      //   localStorage.setItem('redirectPath', String(path))
+      // }
+      console.log(this.$route.fullPath)
+      alert(this.$route.fullPath)
       await this.liff.init({ liffId }, async () => {
         try {
           console.log('isLoggedIn', this.liff.isLoggedIn())
-          console.log(this.$route)
+          console.log(this.$route.fullPath)
+          alert(String(this.liff.isLoggedIn()))
+          alert(this.$route.fullPath)
 
           if (!this.liff.isLoggedIn()) {
             this.liff.login({ redirectUri: `https://demo-nuxt-liff2.herokuapp.com/` })
           } else {
             const profile = await this.liff.getProfile()
             this.$store.commit('updateProfile', profile)
-
-            const redirectPath = localStorage.getItem('redirectPath')
-            if (redirectPath) {
-              this.$router.push({ path: redirectPath })
-              localStorage.removeItem('redirectPath')
-            }
+            alert('login success')
+            // const redirectPath = localStorage.getItem('redirectPath')
+            // if (redirectPath) {
+            //   this.$router.push({ path: redirectPath })
+            //   localStorage.removeItem('redirectPath')
+            // }
           }
         } catch (e) {
           console.log(e)
