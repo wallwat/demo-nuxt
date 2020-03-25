@@ -25,7 +25,7 @@ export default {
           console.log(this.$route)
 
           if (!this.liff.isLoggedIn()) {
-            this.liff.login({ redirectUri: `http://localhost.com:3000` })
+            this.liff.login({ redirectUri: `https://demo-nuxt-liff2.herokuapp.com/` })
           } else {
             const profile = await this.liff.getProfile()
             this.$store.commit('updateProfile', profile)
